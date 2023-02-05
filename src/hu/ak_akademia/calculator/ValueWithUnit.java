@@ -18,6 +18,13 @@ public final class ValueWithUnit {
 		return unit;
 	}
 
+	public void convertTo(LengthUnit targetUnit) {
+		if (targetUnit != this.unit) {
+			this.value = this.value * this.unit.getConversionRate() / targetUnit.getConversionRate();
+			this.unit = targetUnit;
+		}
+	}
+
 	public ValueWithUnit add(ValueWithUnit other) {
 		other.convertTo(this.unit);
 		return new ValueWithUnit(this.value + other.value, this.unit);
@@ -30,13 +37,6 @@ public final class ValueWithUnit {
 	public ValueWithUnit multiply(ValueWithUnit other) {
 		other.convertTo(this.unit);
 		return new ValueWithUnit(this.value * other.value, this.unit);
-	}
-	
-	private void convertTo(LengthUnit targetUnit) {
-		if (targetUnit != this.unit) {
-			this.value = this.value * this.unit.getConversionRate() / targetUnit.getConversionRate();
-			this.unit = targetUnit;
-		}
 	}
 
 	private int getNumberOfDecimalPlaces(double value) {

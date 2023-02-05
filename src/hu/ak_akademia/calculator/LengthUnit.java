@@ -1,6 +1,6 @@
 package hu.ak_akademia.calculator;
 
-enum LengthUnit {
+public enum LengthUnit {
 
 	MM("mm", 1.0 / 1000), CM("cm", 1.0 / 100), DM("dm", 1.0 / 10), M("m", 1.0), KM("km", 1000.0);
 

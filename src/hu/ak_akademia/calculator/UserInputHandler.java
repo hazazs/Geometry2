@@ -24,11 +24,20 @@ public final class UserInputHandler {
 		do {
 			System.out.print(message);
 			input = scanner.nextLine();
-		} while (!isValid(input));
+		} while (!isValidValueWithUnit(input));
 		return getValueWithUnitFrom(input);
 	}
 
-	private boolean isValid(String input) {
+	public LengthUnit readLengthUnit(String message) {
+		String input;
+		do {
+			System.out.print(message);
+			input = scanner.nextLine();
+		} while (!isValidLengthUnit(input));
+		return LengthUnit.getFrom(input);
+	}
+
+	private boolean isValidValueWithUnit(String input) {
 		for (LengthUnit lengthUnit : LengthUnit.values()) {
 			if (input.matches(String.format("\\d+(,\\d+)? %s", lengthUnit.getUnitName()))) {
 				return true;
@@ -42,6 +51,15 @@ public final class UserInputHandler {
 		double value = Double.parseDouble(elements[0].replaceAll(",", "."));
 		LengthUnit unit = LengthUnit.getFrom(elements[1]);
 		return new ValueWithUnit(value, unit);
+	}
+
+	private boolean isValidLengthUnit(String input) {
+		for (LengthUnit lengthUnit : LengthUnit.values()) {
+			if (lengthUnit.getUnitName().equals(input)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
