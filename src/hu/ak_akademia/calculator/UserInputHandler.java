@@ -2,7 +2,8 @@ package hu.ak_akademia.calculator;
 
 import java.util.Scanner;
 
-final class UserInputHandler {
+@Singleton
+public final class UserInputHandler {
 
 	private static UserInputHandler inputHandler;
 	private final Scanner scanner;
@@ -29,7 +30,7 @@ final class UserInputHandler {
 
 	private boolean isValid(String input) {
 		for (LengthUnit lengthUnit : LengthUnit.values()) {
-			if (input.matches(String.format("\\d+(\\.\\d+)? %s", lengthUnit.getUnitName()))) {
+			if (input.matches(String.format("\\d+(,\\d+)? %s", lengthUnit.getUnitName()))) {
 				return true;
 			}
 		}
@@ -38,7 +39,7 @@ final class UserInputHandler {
 
 	private ValueWithUnit getValueWithUnitFrom(String input) {
 		String[] elements = input.split(" ");
-		double value = Double.parseDouble(elements[0]);
+		double value = Double.parseDouble(elements[0].replaceAll(",", "."));
 		LengthUnit unit = LengthUnit.getFrom(elements[1]);
 		return new ValueWithUnit(value, unit);
 	}

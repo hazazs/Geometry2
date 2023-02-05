@@ -1,9 +1,9 @@
 package hu.ak_akademia.calculator;
 
-final class ValueWithUnit {
+public final class ValueWithUnit {
 
-	private final double value;
-	private final LengthUnit unit;
+	private double value;
+	private LengthUnit unit;
 
 	ValueWithUnit(double value, LengthUnit unit) {
 		this.value = value;
@@ -18,18 +18,25 @@ final class ValueWithUnit {
 		return unit;
 	}
 
-	ValueWithUnit convertTo(LengthUnit targetUnit) {
-		if (targetUnit == this.unit) {
-			return this;
-		} else {
-			double newValue = this.value * this.unit.getConversionRate() / targetUnit.getConversionRate();
-			return new ValueWithUnit(newValue, targetUnit);
-		}
+	public ValueWithUnit add(ValueWithUnit other) {
+		other.convertTo(this.unit);
+		return new ValueWithUnit(this.value + other.value, this.unit);
 	}
 
-	ValueWithUnit add(ValueWithUnit other) {
-		double otherValue = other.convertTo(this.unit).value;
-		return new ValueWithUnit(this.value + otherValue, this.unit);
+	public ValueWithUnit multiply(double number) {
+		return new ValueWithUnit(this.value * number, this.unit);
+	}
+
+	public ValueWithUnit multiply(ValueWithUnit other) {
+		other.convertTo(this.unit);
+		return new ValueWithUnit(this.value * other.value, this.unit);
+	}
+	
+	private void convertTo(LengthUnit targetUnit) {
+		if (targetUnit != this.unit) {
+			this.value = this.value * this.unit.getConversionRate() / targetUnit.getConversionRate();
+			this.unit = targetUnit;
+		}
 	}
 
 	private int getNumberOfDecimalPlaces(double value) {
