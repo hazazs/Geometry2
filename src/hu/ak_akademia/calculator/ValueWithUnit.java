@@ -38,6 +38,10 @@ public final class ValueWithUnit {
 		other.convertTo(this.unit);
 		return new ValueWithUnit(this.value * other.value, this.unit);
 	}
+	
+	public ValueWithUnit divide(double number) {
+		return new ValueWithUnit(this.value / number, this.unit);
+	}
 
 	private int getNumberOfDecimalPlaces(double value) {
 		if (String.format("%f", value).matches("\\d+,0+")) {

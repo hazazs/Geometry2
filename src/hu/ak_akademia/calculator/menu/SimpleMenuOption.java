@@ -1,5 +1,6 @@
 package hu.ak_akademia.calculator.menu;
 
+import hu.ak_akademia.calculator.InputLogicForShape;
 import hu.ak_akademia.calculator.LengthUnit;
 import hu.ak_akademia.calculator.UserInputHandler;
 import hu.ak_akademia.calculator.shape.Shape;
@@ -36,6 +37,11 @@ public class SimpleMenuOption implements MenuOption {
 				.readLengthUnit("In which length unit do you want the area and perimeter to be calculated? ");
 		System.out.println("Area = " + shape.calculateArea(targetUnit) + "²");
 		System.out.println("Perimeter = " + shape.calculatePerimeter(targetUnit));
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s - %s", number, description);
 	}
 
 }
