@@ -1,5 +1,7 @@
 package hu.ak_akademia.calculator;
 
+import java.util.stream.Stream;
+
 public enum LengthUnit {
 
 	MM("mm", 1.0 / 1000), CM("cm", 1.0 / 100), DM("dm", 1.0 / 10), M("m", 1.0), KM("km", 1000.0);
@@ -20,13 +22,11 @@ public enum LengthUnit {
 		return conversionRate;
 	}
 
-	static LengthUnit getFrom(String stringUnit) {
-		for (LengthUnit lengthUnit : values()) {
-			if (stringUnit.equals(lengthUnit.unitName)) {
-				return lengthUnit;
-			}
-		}
-		throw new IllegalArgumentException("Invalid length unit: " + stringUnit);
+	static LengthUnit getFrom(final String stringUnit) {
+		return Stream.of(values())
+				.filter(lengthUnit -> stringUnit.equals(lengthUnit.unitName))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("Invalid length unit: " + stringUnit));
 	}
 
 }

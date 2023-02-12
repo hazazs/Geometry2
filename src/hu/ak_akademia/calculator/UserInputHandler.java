@@ -1,6 +1,7 @@
 package hu.ak_akademia.calculator;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 @Singleton
 public final class UserInputHandler {
@@ -37,13 +38,10 @@ public final class UserInputHandler {
 		return LengthUnit.getFrom(input);
 	}
 
-	private boolean isValidValueWithUnit(String input) {
-		for (LengthUnit lengthUnit : LengthUnit.values()) {
-			if (input.matches(String.format("\\d+(,\\d+)? %s", lengthUnit.getUnitName()))) {
-				return true;
-			}
-		}
-		return false;
+	private boolean isValidValueWithUnit(final String input) {
+		return Stream.of(LengthUnit.values())
+				.anyMatch(lengthUnit -> input.matches("\\d+(,\\d+)? " + lengthUnit.getUnitName()) &&
+						input.matches(".*[123456789].*"));
 	}
 
 	private ValueWithUnit getValueWithUnitFrom(String input) {
@@ -53,13 +51,9 @@ public final class UserInputHandler {
 		return new ValueWithUnit(value, unit);
 	}
 
-	private boolean isValidLengthUnit(String input) {
-		for (LengthUnit lengthUnit : LengthUnit.values()) {
-			if (lengthUnit.getUnitName().equals(input)) {
-				return true;
-			}
-		}
-		return false;
+	private boolean isValidLengthUnit(final String input) {
+		return Stream.of(LengthUnit.values())
+				.anyMatch(lengthUnit -> input.equals(lengthUnit.getUnitName()));
 	}
 
 }
