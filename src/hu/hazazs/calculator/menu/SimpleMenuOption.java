@@ -1,9 +1,9 @@
-package hu.ak_akademia.calculator.menu;
+package hu.hazazs.calculator.menu;
 
-import hu.ak_akademia.calculator.InputLogicForShape;
-import hu.ak_akademia.calculator.LengthUnit;
-import hu.ak_akademia.calculator.UserInputHandler;
-import hu.ak_akademia.calculator.shape.Shape;
+import hu.hazazs.calculator.InputLogicForShape;
+import hu.hazazs.calculator.LengthUnit;
+import hu.hazazs.calculator.UserInputHandler;
+import hu.hazazs.calculator.shape.Shape;
 
 public class SimpleMenuOption implements MenuOption {
 

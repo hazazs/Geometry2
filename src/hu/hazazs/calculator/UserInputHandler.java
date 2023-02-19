@@ -1,4 +1,4 @@
-package hu.ak_akademia.calculator;
+package hu.hazazs.calculator;
 
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -38,10 +38,19 @@ public final class UserInputHandler {
 		return LengthUnit.getFrom(input);
 	}
 
+	public int readMenuNumber(int menuSize, String message) {
+		String input;
+		do {
+			System.out.print(message);
+			input = scanner.nextLine();
+		} while (!isValidMenuOption(input, menuSize));
+		return Integer.parseInt(input);
+	}
+
 	private boolean isValidValueWithUnit(final String input) {
 		return Stream.of(LengthUnit.values())
-				.anyMatch(lengthUnit -> input.matches("\\d+(,\\d+)? " + lengthUnit.getUnitName()) &&
-						input.matches(".*[123456789].*"));
+				.anyMatch(lengthUnit -> input.matches("\\d+(,\\d+)? " + lengthUnit.getUnitName())
+						&& input.matches(".*[123456789].*"));
 	}
 
 	private ValueWithUnit getValueWithUnitFrom(String input) {
@@ -54,6 +63,15 @@ public final class UserInputHandler {
 	private boolean isValidLengthUnit(final String input) {
 		return Stream.of(LengthUnit.values())
 				.anyMatch(lengthUnit -> input.equals(lengthUnit.getUnitName()));
+	}
+
+	private boolean isValidMenuOption(String input, int menuSize) {
+		try {
+			int menuOption = Integer.parseInt(input);
+			return menuOption > 0 && menuOption <= menuSize;
+		} catch (NumberFormatException exception) {
+			return false;
+		}
 	}
 
 }

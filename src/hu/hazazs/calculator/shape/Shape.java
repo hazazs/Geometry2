@@ -1,7 +1,7 @@
-package hu.ak_akademia.calculator.shape;
+package hu.hazazs.calculator.shape;
 
-import hu.ak_akademia.calculator.LengthUnit;
-import hu.ak_akademia.calculator.ValueWithUnit;
+import hu.hazazs.calculator.LengthUnit;
+import hu.hazazs.calculator.ValueWithUnit;
 
 public interface Shape {
 

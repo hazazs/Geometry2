@@ -1,4 +1,4 @@
-package hu.ak_akademia.calculator.menu;
+package hu.hazazs.calculator.menu;
 
 public interface MenuOption {
 

@@ -1,7 +1,7 @@
-package hu.ak_akademia.calculator;
+package hu.hazazs.calculator;
 
 import java.util.function.Function;
-import hu.ak_akademia.calculator.shape.Shape;
+import hu.hazazs.calculator.shape.Shape;
 
 @FunctionalInterface
 public interface InputLogicForShape extends Function<UserInputHandler, Shape> {

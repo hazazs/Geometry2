@@ -1,4 +1,4 @@
-package hu.ak_akademia.calculator;
+package hu.hazazs.calculator;
 
 import java.util.stream.Stream;
 
